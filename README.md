@@ -92,7 +92,24 @@ IoT 개발자과정 ASP.NET 리포지토리
 
 ## 2일차
 - HTML5
-    - 시맨틱 태그
+    - 시맨틱 태그 - 시맨틱 태그로 화면을 구조를 잡는 웹구성 방식
+        - header, nav, foother, aside, section, article....태그 사용
 - CSS3
-    - 웹 디자인 핵심
+    - 웹 디자인 핵심, Casting Style Sheets
+    - 상단에서부터 <body> 부터 하위에 태그들에 계속해서 적용되는 스타일이라는 뜻
+    - 선택자에게 주어지는 디자인 속성
+    - 선택자(selector)
+    - 속성(property)
+    - 배경 , 폰트 ...
+    - 레이아웃
+        - HTML 만으로는 화면 레이아웃이 만들어지지 않음
+        - 중앙정렬, 원트루 , 고정바...
+    - 반응형 웬(Responsive Web)
+        - 메타태크 viewport를 사용하면 그때부터 반응형 웹이 됨!!
+        ```html
+        <meta name='viewport' content='width=device-width, initial-scale=1'
+        ````
+        -@meida 태그: 디바이스 종류별로 CSS 따로 디자인가능
+
+        
 - Javascript
