@@ -190,20 +190,8 @@ IoT 개발자과정 ASP.NET 리포지토리
     - 웹페이지 클로닝
         - 핀터레스트 타입  핀터레스트 타입 웹페이지 만들기(완료)
 
-<<<<<<< Updated upstream
-
             https://github.com/leekminxx/basic-aspnet-2024/assets/158007500/d858dd93-5c90-4e67-913d-e55c5b8a88df
-
-
-
+       
         - Codehal 유튜버 로그인 웹페이지 튜토리얼 따라하기
-        <img src>
-        ![이미지](https://img)
-=======
-        
-    - Codehal 유튜버 로그인 웹페이지 튜토리얼 따라하기
 
-     <img src="https://raw.githubusercontent.com/leekminxx/basic-aspnet-2024/main/images/an0001.png" width="730" alt="Codehal 로그인창 따라하기">
-
-     <!-- ![이미지]()>
->>>>>>> Stashed changes
+            <img src="https://raw.githubusercontent.com/leekminxx/basic-aspnet-2024/main/images/an0001.png" width="730" alt="Codehal 로그인창 따라하기">
