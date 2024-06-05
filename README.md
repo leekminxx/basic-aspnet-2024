@@ -205,10 +205,7 @@ IoT 개발자과정 ASP.NET 리포지토리
    
 
 
-
-
-            https://github.com/leekminxx/basic-aspnet-2024/assets/158007500/f44207b0-a842-4c46-a50b-94b15fdadb81
-
+            https://github.com/leekminxx/basic-aspnet-2024/assets/158007500/c0daeb31-e5f3-47b5-a092-e03588668941
 
 
 
