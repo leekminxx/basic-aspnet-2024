@@ -270,4 +270,10 @@ IoT 개발자과정 ASP.NET 리포지토리
 
           https://github.com/leekminxx/basic-aspnet-2024/assets/158007500/65fadf02-548a-4c2c-82c9-d4b7d268ecba
 
+        - 모바일 세로모드
+      
+
+
+          https://github.com/leekminxx/basic-aspnet-2024/assets/158007500/75e7473c-79e4-484a-acf6-225a0a5980db
+
 
