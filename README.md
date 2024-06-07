@@ -266,5 +266,7 @@ IoT 개발자과정 ASP.NET 리포지토리
                 - changeColor 함수는 선택된 색상에 따라 신발 이미지와 배경 그라데이션을 변경합니다.
                 - 각 색상 요소에 클릭 이벤트 리스너를 추가해 선택된 색상에 따라 changeColor 함수를 호출합니다.
 
+        - 가로모드
+            - https://github.com/leekminxx/basic-aspnet-2024/assets/158007500/65fadf02-548a-4c2c-82c9-d4b7d268ecba
 
 
