@@ -268,6 +268,6 @@ IoT 개발자과정 ASP.NET 리포지토리
 
         - 가로모드
 
-              https://github.com/leekminxx/basic-aspnet-2024/assets/158007500/65fadf02-548a-4c2c-82c9-d4b7d268ecba
+          https://github.com/leekminxx/basic-aspnet-2024/assets/158007500/65fadf02-548a-4c2c-82c9-d4b7d268ecba
 
 
