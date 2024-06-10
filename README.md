@@ -277,7 +277,7 @@ IoT 개발자과정 ASP.NET 리포지토리
           https://github.com/leekminxx/basic-aspnet-2024/assets/158007500/75e7473c-79e4-484a-acf6-225a0a5980db
 
 
-## 9일차
+## 8일차
 - ASP.NET
     - ASP.NET 역사
         - 1990년대 MS가 웹 서버기술로 ASP(Active Server Page)를 배포. like JSP(Java Server Page)
@@ -324,11 +324,45 @@ IoT 개발자과정 ASP.NET 리포지토리
 
         <img src="https://raw.githubusercontent.com/leekminxx/basic-aspnet-2024/main/images/an0002.png" width="730">
 
-    - 프론트엔드가 예전에 스파게티코드가 무지 심했따면 , 현재는 스파게티코드가 최소화 되어있음.(SpringBoot Python flask든 모두 동일)
-    - IIS Express Server - VS에서 ASP.NET 웹사이트를 운영하는 개발용 웹서버 
-    - index.* - 웹사이트 가장 대문되는 페이지이름
-    - 파일 저장시 핫다시로드(HotReload) 체크
-    - @로 시작하는 C# 구문. Tag helper, Html helper 로 HTML 구문 내에 C# 코드를 적어서 활용하는 방법 = Razor 구문
-    - Action == HTMl 에서 form 태그내 submit버튼 클릭! / 링크를 클릭
-    - 액션이 발생한 이후 처리하는 메서드의 결과를 ActionResult
-    - 콘솔 서버로그 잘 확인할 것 , 프로세스가 종료되면 웹사이트가 실행안됨 
+        - 프론트엔드가 예전에 스파게티코드가 무지 심했다면 , 현재는 스파게티코드가 최소화 되어있음.(SpringBoot Python flask든 모두 동일)
+        - IIS Express Server - VS에서 ASP.NET 웹사이트를 운영하는 개발용 웹서버 
+        - index.* - 웹사이트 가장 대문되는 페이지이름
+        - 파일 저장시 핫다시로드(HotReload) 체크
+        - @로 시작하는 C# 구문. Tag helper, Html helper 로 HTML 구문 내에 C# 코드를 적어서 활용하는 방법 = Razor 구문
+        - Action == HTMl 에서 form 태그내 submit버튼 클릭! / 링크를 클릭
+        - 액션이 발생한 이후 처리하는 메서드의 결과를 ActionResult
+        - 콘솔 서버로그 잘 확인할 것 , 프로세스가 종료되면 웹사이트가 실행안됨 
+    
+    - 테이터베이스 연동방법
+        - DB first - 가장 전통적인 DB 연동방식. DB설계, DB구축, C#과 연동
+        - Code first - 최근 트랜드가 되는 DB 연동방식. C#클래스 작성, DB연결 설정 후 실행하면 DB에 테이블이 생성...
+        - EntityFramework를 사용하면 아주 손쉽게 구축가능
+    
+    - EntityFramework(Core) 설치
+        - Microsoft.EntityFrameworkCore.
+        - Microsoft.EntityFrameworkCore.Tools
+        - Microsoft.EntityFrameworkCore.SqlServer
+
+    - Code first 구현순서 
+        - ASP.NET 프로젝트 생성
+        - EF 패키지 설치
+        - 엔티티 클래스 작성
+        - appsettings.json 에 DB연결문자열 추가 
+        - Data/ApplicationDbContext.cs 중간연결 클래스 생성
+        - Program.cs Services 내에 DbContext
+        - NuGet 패키지 관리자 > 패키지 관리자 콘솔 실행
+            ```shell
+            PM> add-migration 마이그레이션명
+            Build started...
+            Build succeeded.
+            ...
+            PM> update-database
+            ...
+            Done.
+            ```
+## 9일차 (07.22)
+- ASP.NET Core MVC
+    - 필요 이론
+    - 연습
+    - 개인 포트폴리오 웹사이트
+    - Bootstrap 테마 적용
