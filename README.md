@@ -322,7 +322,13 @@ IoT 개발자과정 ASP.NET 리포지토리
         - Java 계열도 Spring (Boot) MVC로 개발 
         - MVC 개념도
 
-        <img src=>
+        <img src="https://raw.githubusercontent.com/leekminxx/basic-aspnet-2024/main/images/an0002.png" width="730">
 
     - 프론트엔드가 예전에 스파게티코드가 무지 심했따면 , 현재는 스파게티코드가 최소화 되어있음.(SpringBoot Python flask든 모두 동일)
     - IIS Express Server - VS에서 ASP.NET 웹사이트를 운영하는 개발용 웹서버 
+    - index.* - 웹사이트 가장 대문되는 페이지이름
+    - 파일 저장시 핫다시로드(HotReload) 체크
+    - @로 시작하는 C# 구문. Tag helper, Html helper 로 HTML 구문 내에 C# 코드를 적어서 활용하는 방법 = Razor 구문
+    - Action == HTMl 에서 form 태그내 submit버튼 클릭! / 링크를 클릭
+    - 액션이 발생한 이후 처리하는 메서드의 결과를 ActionResult
+    - 콘솔 서버로그 잘 확인할 것 , 프로세스가 종료되면 웹사이트가 실행안됨 
