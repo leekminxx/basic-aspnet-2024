@@ -5606,7 +5606,7 @@
 
 
     isWithContent() {
-      return Boolean(this.getTitle());
+      return Boolean(this.gettitle());
     }
 
     getTipElement() {
@@ -5624,7 +5624,7 @@
     }
 
     setContent(tip) {
-      this._sanitizeAndSetContent(tip, this.getTitle(), SELECTOR_TOOLTIP_INNER);
+      this._sanitizeAndSetContent(tip, this.gettitle(), SELECTOR_TOOLTIP_INNER);
     }
 
     _sanitizeAndSetContent(template, content, selector) {
@@ -5670,7 +5670,7 @@
       }
     }
 
-    getTitle() {
+    gettitle() {
       const title = this._element.getAttribute('data-bs-original-title') || this._config.title;
 
       return this._resolvePossibleFunction(title);
@@ -5789,16 +5789,16 @@
           selector: ''
         };
       } else {
-        this._fixTitle();
+        this._fixtitle();
       }
     }
 
-    _fixTitle() {
+    _fixtitle() {
       const title = this._element.getAttribute('title');
 
-      const originalTitleType = typeof this._element.getAttribute('data-bs-original-title');
+      const originaltitleType = typeof this._element.getAttribute('data-bs-original-title');
 
-      if (title || originalTitleType !== 'string') {
+      if (title || originaltitleType !== 'string') {
         this._element.setAttribute('data-bs-original-title', title || '');
 
         if (title && !this._element.getAttribute('aria-label') && !this._element.textContent) {
@@ -6018,7 +6018,7 @@
     MOUSEENTER: `mouseenter${EVENT_KEY$3}`,
     MOUSELEAVE: `mouseleave${EVENT_KEY$3}`
   };
-  const SELECTOR_TITLE = '.popover-header';
+  const SELECTOR_title = '.popover-header';
   const SELECTOR_CONTENT = '.popover-body';
   /**
    * ------------------------------------------------------------------------
@@ -6046,11 +6046,11 @@
 
 
     isWithContent() {
-      return this.getTitle() || this._getContent();
+      return this.gettitle() || this._getContent();
     }
 
     setContent(tip) {
-      this._sanitizeAndSetContent(tip, this.getTitle(), SELECTOR_TITLE);
+      this._sanitizeAndSetContent(tip, this.gettitle(), SELECTOR_title);
 
       this._sanitizeAndSetContent(tip, this._getContent(), SELECTOR_CONTENT);
     } // Private

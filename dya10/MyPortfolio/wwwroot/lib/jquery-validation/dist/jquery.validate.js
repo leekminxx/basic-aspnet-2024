@@ -292,7 +292,7 @@ $.extend( $.validator, {
 		errorLabelContainer: $( [] ),
 		onsubmit: true,
 		ignore: ":hidden",
-		ignoreTitle: false,
+		ignoretitle: false,
 		onfocusin: function( element ) {
 			this.lastActive = element;
 
@@ -877,7 +877,7 @@ $.extend( $.validator, {
 					this.customDataMessage( element, rule.method ),
 
 					// 'title' is never undefined, so handle empty string as undefined
-					!this.settings.ignoreTitle && element.title || undefined,
+					!this.settings.ignoretitle && element.title || undefined,
 					$.validator.messages[ rule.method ],
 					"<strong>Warning: No message defined for " + element.name + "</strong>"
 				),
