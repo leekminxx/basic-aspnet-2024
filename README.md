@@ -394,12 +394,10 @@ IoT 개발자과정 ASP.NET 리포지토리
     5. 중간에 페이지마다 변경되는 부분은 각 Views 밑에 포함
     6. _layout.cshtml 에 공통부분 옮기기
     7. index.cshtml에 index.html 에서 공통부분 외 영역 옮기기
-
     9. ResumeController.cs 생성 , DB관련된 설정이 없으면 모델, 뷰를 만들기 어려움
     10. Resume 란 폴더라 Views 아래에 만듦
     11. resume.html 에 네비게이션 아래 변경부분만 복사해서 index.cshtml 에 붙여넣기
     12. Project, Contact도 동일하게 적용
-
     13. Code First 방식으로 Board테이블 생성
     14. Nuget 패키지에서 Microsoft,EntityFrameworkCore 패키지 검색 , 설치 
     15. Microsoft.EntityFrameworkCore.Tools 검색 , 설치
