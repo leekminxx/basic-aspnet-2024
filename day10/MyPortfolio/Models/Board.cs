@@ -26,16 +26,18 @@ namespace MyPortfolio.Models
         [Required(ErrorMessage = "내용은 필수입니다")]
         [DisplayName("내용")]
         public string Contents { get; set; } // 게시글 내용
-
+        // ? DB에서 Null 허용
         [DisplayName("조회수")]
-        public int Hit { get; set; } // 읽은 횟수
+        public int? Hit { get; set; } // 읽은 횟수
 
         [DisplayName("작성일")]
-        public DateTime RegDate { get; set; } // 게시글 작성일자
-
+        public DateTime? RegDate { get; set; } // 게시글 작성일자
+        
         // Nullable 변수로 변경
         [DisplayName("수정일")]
         public DateTime? ModDate { get; set; } // 게시글 최종 수정일자
-
+        
+        // RelationShip 부모User -> 자식 Board
+        public virtual User User { get; set; }
     }
 }

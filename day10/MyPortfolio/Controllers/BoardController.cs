@@ -48,7 +48,8 @@ namespace MyPortfolio.Controllers
             ViewBag.StartPage = startPage;
             ViewBag.EndPage = endPage;
             ViewBag.Page = page;
-            ViewBag.TotalPage = totalPage;
+            ViewBag.TotalPage = totalPage; 
+            ViewBag.TotalCount = totalCount;
 
             //var StartCount = new SqlParameter("@StartCount", startCount);
             //var EndCount = new SqlParameter("@EndCount", endCount);
