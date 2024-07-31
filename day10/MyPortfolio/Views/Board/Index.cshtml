@@ -14,6 +14,8 @@
     var num = ViewBag.TotalCount - ((page - 1) * 10); // 전체 게시글 수를 (현재페이지-1)값과 페이지당 게시글수 곱을 빼기
 }
 
+<partial name="_Notification" />
+
 <style>
     /* 마우스가 없을땐 밑줄없이 */
     a {
@@ -30,12 +32,12 @@
     <div class="container px-5">
         <div class="row justify-content-between p-2">
             <div class="col-3">
-            @if (Context.Session.GetInt32("USER_LOGIN_KEY") != null)
-            {
-                <a asp-controller="Board" asp-action="Create" class="btn btn-primary">
-                    <i class="bi bi-file-earmark-plus-fill"></i>&nbsp;글 작성
-                </a>
-            }
+                @if (Context.Session.GetInt32("USER_LOGIN_KEY") != null)
+                {
+                    <a asp-controller="Board" asp-action="Create" class="btn btn-primary">
+                        <i class="bi bi-file-earmark-plus-fill"></i>&nbsp;글 작성
+                    </a>
+                }                
             </div>
             <div class="col-9 text-end">
                 <form asp-action="Index" method="GET">
@@ -43,10 +45,17 @@
                     <button type="submit" class="btn btn-success">검색</button>
                 </form>
             </div>
-        </div>
+                
+        </div>            
         <table class="table table-light table-striped">
             <thead>
                 <tr class="table-primary">
+                    <th style="width:3rem;">
+                        번호
+                    </th>
+                    @* <th style="width:8rem;">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th> *@
                     <th style="width:8rem;">
                         @Html.DisplayNameFor(model => model.UserName)
                     </th>
@@ -72,6 +81,10 @@
                 @foreach (var item in Model)
                 {
                     <tr>
+                        <td class="text-end pe-3">@(num--)</td>
+                        @* <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td> *@
                         <td>
                             @Html.DisplayFor(modelItem => item.UserName)
                         </td>
@@ -106,6 +119,7 @@
                 }
             </tbody>
         </table>
+
         <!-- 페이징컨트롤 -->
         <nav class="text-center">
             <ul class="pagination justify-content-center">
@@ -113,10 +127,9 @@
                 {
                     <li class="page-item">
                         <a href="?page=1&search=@ViewBag.Search" class="page-link"> ≪ </a>
-                    </li>
+                    </li> 
                 }
-                else
-                {
+                else {
                     <li class="page-item disabled">
                         <span class="page-link"> ≪ </span>
                     </li>
@@ -141,13 +154,13 @@
                     {
                         <li class="page-item">
                             <span class="page-link active">@i</span>
-                        </li>
+                        </li>                        
                     }
                     else
                     {
                         <li class="page-item">
                             <a href="?page=@i&search=@ViewBag.Search" class="page-link">@i</a>
-                        </li>
+                        </li>                        
                     }
                 }
 
@@ -156,8 +169,7 @@
                     <li class="page-item">
                         <a href="?page=@(page+1)&search=@ViewBag.Search" class="page-link"> ＞ </a>
                     </li>
-                }
-                else
+                } else
                 {
                     <li class="page-item diabled">
                         <span class="page-link"> ＞ </span>
@@ -169,8 +181,7 @@
                     <li class="page-item">
                         <a href="?page=@totalPage&search=@ViewBag.Search" class="page-link"> ≫ </a>
                     </li>
-                }
-                else
+                } else
                 {
                     <li class="page-item disabled">
                         <spane class="page-link"> ≫ </spane>

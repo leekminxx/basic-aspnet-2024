@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyPortfolio.Data;
 using MyPortfolio.Models;
@@ -14,9 +9,13 @@ namespace MyPortfolio.Controllers
     {
         private readonly AppDbContext _context;
 
-        public ProjectController(AppDbContext context)
+        // 파일 업로드 웹환경 
+        private readonly IWebHostEnvironment _environment;
+
+        public ProjectController(AppDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
 
         // GET: Project
@@ -54,64 +53,89 @@ namespace MyPortfolio.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ProjectName,Description,FilePath")] Project project, IFormFile FilePath)
+        public async Task<IActionResult> Create(TempProject temp)
         {
             if (ModelState.IsValid)
             {
-                if (FilePath != null && FilePath.Length > 0)
-                {
-                    var fileUrl = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", FilePath.FileName);
+                // 파일 업로드
+                string upFileName = UploadImageFile(temp);
 
-                    // TODO
-                    // 이미지 파일 이름이 중복되지 않도록 랜덤으로 변경
-                    // FileStream으로 위 경로에 파일 저장
-                }
+                // 파일명을 받아서 TempProject 내용을 Project로 이전
+                Project project = new Project
+                {
+                    ProjectName = temp.ProjectName,
+                    Description = temp.Description,
+                    FilePath = upFileName,
+                };
 
                 _context.Add(project);
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(project);
+            return View(temp);
         }
 
         // GET: Project/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) {  return NotFound(); }
 
             var project = await _context.Project.FindAsync(id);
             if (project == null)
             {
                 return NotFound();
             }
-            return View(project);
+
+            // 이미지 때문에 추가작업
+            TempProject temp = new TempProject
+            {
+                Id = project.Id,
+                ProjectName = project.ProjectName,
+                Description = project.Description,
+                FilePath = project.FilePath,
+            };
+
+            return View(temp);
         }
+
 
         // POST: Project/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ProjectName,Description,FilePath")] Project project)
-        {
-            if (id != project.Id)
-            {
-                return NotFound();
-            }
-
+        public async Task<IActionResult> Edit(TempProject temp)
+        { 
             if (ModelState.IsValid)
             {
+                // 파일 업로드
+                string upFileName = UploadImageFile(temp);
+
+                // 새로 업로드된 파일이 없고, 이전 파일명이 있으면
+                // 그 파일명을 그대 사용!!!
+                if (upFileName == string.Empty && temp.FilePath != string.Empty)
+                {
+                    upFileName = temp.FilePath;
+                }
+
                 try
                 {
+                    // 파일명을 받아서 TempProject 내용을 Project로 이전
+                    Project project = new Project
+                    {
+                        Id = temp.Id,
+                        ProjectName = temp.ProjectName,
+                        Description = temp.Description,
+                        FilePath = upFileName,
+                    };
+
                     _context.Update(project);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProjectExists(project.Id))
+                    if (!ProjectExists(temp.Id))
                     {
                         return NotFound();
                     }
@@ -122,8 +146,9 @@ namespace MyPortfolio.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(project);
+            return View(temp);
         }
+        
 
         // GET: Project/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -162,5 +187,33 @@ namespace MyPortfolio.Controllers
         {
             return _context.Project.Any(e => e.Id == id);
         }
+
+        #region `업로드메서드 - Routing에 관련없음`
+
+        /// <summary>
+        /// 파일업로드 메서드!!
+        /// </summary>
+        /// <param name="temp"></param>
+        /// <returns></returns>
+        private string UploadImageFile(TempProject temp)
+        {
+            var resultFileName = string.Empty;
+
+            if (temp.ProjectImage != null)
+            {
+                string uploadFolder = Path.Combine(_environment.WebRootPath, "uploads");
+                resultFileName = Guid.NewGuid() + "_" + temp.ProjectImage.FileName;
+                string filePath = Path.Combine(uploadFolder, resultFileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    temp.ProjectImage.CopyTo(fileStream);
+                }
+            }
+
+            return resultFileName;
+        }
+
+        #endregion
     }
 }

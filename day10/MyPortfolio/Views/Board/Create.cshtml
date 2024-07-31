@@ -12,13 +12,21 @@
                 <form asp-controller="Board" asp-action="Create">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+                    @* <div class="mb-3 row">
+                        <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div> *@
+
                     <div class="mb-3 row">
                         <label asp-for="UserName" class="col-sm-2 col-form-label"></label>
                         <div class="col-sm-10">
-                            <input asp-for="UserName" class="form-control" value="@ViewData["USER_NAME"]" readonly/>
+                            <input asp-for="UserName" class="form-control" value='@ViewData["USER_NAME"]' readonly />
                         </div>
                     </div>
-
+                    
                     <div class="form-group">
                         <label asp-for="Title" class="control-label"></label>
                         <input asp-for="Title" class="form-control" />

@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MyPortfolio.Data;
 using MyPortfolio.Helper;
 using MyPortfolio.Models;
 using System.Diagnostics;
-using System.Security.Cryptography;     // 암호화
+using System.Security.Cryptography; // 암호화
 
 namespace MyPortfolio.Controllers
 {
@@ -16,22 +16,21 @@ namespace MyPortfolio.Controllers
         //public HomeController(ILogger<HomeController> logger, AppDbContext context)
         //{
         //    _logger = logger;
-        //    _context = context;         
+        //    _context = context; // DB를 연결해서 사용하겠다는 초기화
         //}
 
-        // DB를 연결해서 사용하겠다는 초기화
         public HomeController(AppDbContext context)
         {
             _context = context;
         }
 
-        [HttpGet]   // Default라서 생략 가능, 화면 요청
+        [HttpGet] // Default로 생략가능
         public IActionResult Index()
         {
             return View();
         }
-        
-        [HttpGet]   // 화면 요청
+
+        [HttpGet]
         public IActionResult Privacy()
         {
             return View();
@@ -43,14 +42,13 @@ namespace MyPortfolio.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        // 회원 로그인 새로 추가
+        // 회원로그인으로 새로 추가
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
-      
         [HttpPost]
         public IActionResult Login(User user)
         {
@@ -79,7 +77,7 @@ namespace MyPortfolio.Controllers
         [HttpGet]
         public IActionResult Logout()
         {
-            // 로그인 시 생성된 세션 삭제
+            // 로그인시 생성된 세션 삭제
             HttpContext.Session.Remove("USER_LOGIN_KEY");
             HttpContext.Session.Remove("USER_NAME");
             HttpContext.Session.Remove("USER_EMAIL");
@@ -87,18 +85,18 @@ namespace MyPortfolio.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // 회원등록 페이지 열기
+        // 회원등록 페이지를 열어줘
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
 
-        // 회원등록 페이지 내용 DB 저장
+        // 회워등록 페이지 내용을 DB에 저장해줘.
         [HttpPost]
         public async Task<IActionResult> Register(User user)
         {
-            // 패스워드 두 개가 일치하지 않을 때 일부러 검증에러를 발생!
+            // 패스워드 두개가 일치하지 않을때 일부러 검증에러를 발생!
             if (user.Password != user.PasswordCheck)
             {
                 ModelState.AddModelError("PasswordCheck", "패스워드가 일치하지 않습니다.");
@@ -106,23 +104,34 @@ namespace MyPortfolio.Controllers
 
             if (ModelState.IsValid)
             {
-                // 모든 값이 정확히 들어왔음
-                user.RegDate = DateTime.Now;        // 회원 등록 날짜 오늘로 지정
+                // 모든값이 정확히 들어왔음
+                user.RegDate = DateTime.Now; // 회원 등록날짜 오늘로 지정
 
                 var mdHash = MD5.Create();
                 user.Password = Common.GetMd5Hash(mdHash, user.Password);
                 user.PasswordCheck = null;
 
-                _context.Add(user);                 // INSERT
-                await _context.SaveChangesAsync();  // COMMIT
+                _context.Add(user); // INSERT
+                await _context.SaveChangesAsync(); // COMMIT
                 return RedirectToAction("Login");
             }
+
             return View(user);
         }
 
+        [HttpGet]
         public IActionResult Project()
         {
-            return View();
+            // DB Project 테이블 내용을 리스트로 받아서 View로 전달
+            var list = _context.Project.ToList();
+
+            foreach (var item in list)
+            {
+                var finalPath = "/uploads/" + item.FilePath;
+                item.FilePath = finalPath;
+            }
+
+            return View(list); 
         }
     }
 }
